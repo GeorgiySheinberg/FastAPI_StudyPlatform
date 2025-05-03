@@ -2,30 +2,30 @@ from contextlib import asynccontextmanager
 
 import uvicorn
 from fastapi import FastAPI
-from api import router as api_router
-from core.config import settings
-from core.models import db_helper
+from study_platform.backend.api import router as api_router
+from study_platform.backend.core.config import settings
+from study_platform.backend.core.models import db_helper
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
     yield
-    # Clean up the ML models and release the resources
     await db_helper.dispose()
 
 
-main_app = FastAPI(
+
+
+app = FastAPI(
     lifespan=lifespan
 )
-main_app.include_router(
+app.include_router(
     api_router, prefix=settings.api.api_prefix,
 )
 
 
 if __name__ == "__main__":
     uvicorn.run(
-        "main:main_app",
+        "study_platform.backend.main:app",
             host=settings.run.host,
             port=settings.run.port,
             reload=True,

@@ -14,7 +14,7 @@ class ApiPrefix(BaseModel):
 
 
 class DatabaseConfig(BaseModel):
-    url: PostgresDsn
+    url: PostgresDsn = "postgresql+asyncpg://postgres:postgres@localhost:5432/study_platform_db"
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     )
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
-    db: DatabaseConfig
+    db: DatabaseConfig = DatabaseConfig()
 
 
 settings = Settings()
