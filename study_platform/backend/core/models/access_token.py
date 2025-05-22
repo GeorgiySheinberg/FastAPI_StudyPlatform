@@ -7,7 +7,7 @@ from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
-from core.types.user_id import UserIdType
+from study_platform.backend.core.types.user_id import UserIdType
 
 
 if TYPE_CHECKING:
